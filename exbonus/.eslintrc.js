@@ -8,6 +8,22 @@ module.exports = {
     'airbnb',
   ],
   overrides: [
+    {
+      files: [
+        '**/*.test.js',
+        '**/*.test.jsx',
+        '**/*.spec.js',
+        '**/*.spec.jsx',
+      ],
+      rules: {
+        'no-unused-expressions': 'off',
+        'no-unused-vars': ['error', { varsIgnorePattern: 'React' }],
+        // variable is not defined
+        'no-undef': 'off',
+        'react/react-in-jsx-scope': 'off',
+
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -17,5 +33,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    'default-param-last': 'off',
+    'react/jsx-filename-extension': 'off',
   },
 };
