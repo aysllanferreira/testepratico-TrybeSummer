@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
+  const [isDisabled, setIsDisabled] = useState(true);
+  const { counter } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (counter > 0) setIsDisabled(false);
+    else setIsDisabled(true);
+  }, [counter]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1 data-testid="title">
+        Contador
+      </h1>
+
+      <button
+        data-testid="decrement-button"
+        type="button"
+        disabled={isDisabled}
+        onClick={() => { dispatch({ type: 'DECREMENT' }); }}
+      >
+        -
+      </button>
+
+      <span data-testid="counter">
+        {counter}
+      </span>
+
+      <button
+        data-testid="increment-button"
+        type="button"
+        onClick={() => dispatch({ type: 'INCREMENT' })}
+      >
+        +
+      </button>
     </div>
   );
 }
